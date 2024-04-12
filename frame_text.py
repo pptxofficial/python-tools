@@ -2,7 +2,7 @@ def frame_text(text: str, char="#", padding_x=4, padding_y=1, margin_x=20, margi
   """
   Add a frame around text.
 
-  :param text: A single line of text to frame.
+  :param text: The text to frame. Can have multiple lines.
   :param char: A single character to use as a border of one of the following: "light", "heavy", "light dashed", "heavy dashed", "double".
   :param padding_x: Number of characters used for the horizontal padding.
   :param padding_y: Number of lines used for the vertical padding.
@@ -15,7 +15,8 @@ def frame_text(text: str, char="#", padding_x=4, padding_y=1, margin_x=20, margi
   Example:
     print(frame_text("frame me", "heavy", shadow="medium"))
   """
-  width = len(text)
+  text_list = text.splitlines()
+  width = len(max(text_list, key=len))
   again = 2 if double_sides else 1
 
   # Broder data
@@ -52,14 +53,15 @@ def frame_text(text: str, char="#", padding_x=4, padding_y=1, margin_x=20, margi
     ]))
   
   # Text content
-  lines.append("".join([
-    " " * margin_x,    # Left margin
-    char[3] * again,   # Left border
-    " " * padding_x,   # Left padding
-    text,              # Text content
-    " " * padding_x,   # Right padding
-    char[3] * again    # Right border
-  ]))
+  for text_line in text_list:
+    lines.append("".join([
+      " " * margin_x,           # Left margin
+      char[3] * again,          # Left border
+      " " * padding_x,          # Left padding
+      text_line.center(width),  # Text content
+      " " * padding_x,          # Right padding
+      char[3] * again           # Right border
+    ]))
 
   # Bottom padding
   for _ in range(padding_y): 
@@ -98,4 +100,4 @@ def frame_text(text: str, char="#", padding_x=4, padding_y=1, margin_x=20, margi
     lines.append(" ")
 
   # Return final string
-  return "\n".join(list(filter(None, lines)))
+  return "\n".join(lines)
