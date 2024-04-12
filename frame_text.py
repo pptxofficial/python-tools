@@ -3,13 +3,13 @@ def frame_text(text: str, char="#", padding_x=4, padding_y=1, margin_x=20, margi
   Add a frame around text.
 
   :param text: A single line of text to frame.
-  :param char: A single character to use as a border of one of the following: "light", "heavy", "light dashed", "heavy dashed", "double"
+  :param char: A single character to use as a border of one of the following: "light", "heavy", "light dashed", "heavy dashed", "double".
   :param padding_x: Number of characters used for the horizontal padding.
   :param padding_y: Number of lines used for the vertical padding.
   :param margin_x: Number of characters used for the horizontal margin.
   :param margin_y: Number of lines used for the vertical margin.
   :param double_sides: Doubles the leftmost and rightmost broder characters
-  :param shading: Adds a shadow to the frame. String is one of the following: "light", "medium", "dark"
+  :param shading: Adds a shadow to the frame. String is one of the following: "light", "medium", "dark".
   :return: The framed text.
 
   Example:
@@ -36,46 +36,46 @@ def frame_text(text: str, char="#", padding_x=4, padding_y=1, margin_x=20, margi
 
   # Top border
   lines.append("".join([
-    " " * margin_x,
-    char[0] * again,
-    char[1] * (2 * padding_x + width),
-    char[2] * again
+    " " * margin_x,                     # Left margin
+    char[0] * again,                    # Top-left border
+    char[1] * (2 * padding_x + width),  # Top border
+    char[2] * again                     # Top-right border
   ]))
 
   # Top padding
   for _ in range(padding_y): 
     lines.append("".join([
-      " " * margin_x, 
-      char[3] * again,
-      " " * (2 * padding_x + width),
-      char[3] * again
+      " " * margin_x,                 # Left margin
+      char[3] * again,                # Left border
+      " " * (2 * padding_x + width),  # Top padding
+      char[3] * again                 # Right border
     ]))
   
   # Text content
   lines.append("".join([
-    " " * margin_x, 
-    char[3] * again, 
-    " " * padding_x,
-    text, 
-    " " * padding_x,
-    char[3] * again
+    " " * margin_x,    # Left margin
+    char[3] * again,   # Left border
+    " " * padding_x,   # Left padding
+    text,              # Text content
+    " " * padding_x,   # Right padding
+    char[3] * again    # Right border
   ]))
 
   # Bottom padding
   for _ in range(padding_y): 
     lines.append("".join([
-      " " * margin_x, 
-      char[3] * again,
-      " " * (2 * padding_x + width),
-      char[3] * again
+      " " * margin_x,                 # Left margin
+      char[3] * again,                # Left border
+      " " * (2 * padding_x + width),  # Bottom padding
+      char[3] * again                 # Right border
     ]))
   
   # Bottom border
   lines.append("".join([
-    " " * margin_x,
-    char[4] * again,
-    char[1] * (2 * padding_x + width),
-    char[5] * again
+    " " * margin_x,                     # Left margin
+    char[4] * again,                    # Bottom-left border
+    char[1] * (2 * padding_x + width),  # Bottom border
+    char[5] * again                     # Bottom-right border
   ]))
 
   # Shadow
